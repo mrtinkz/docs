@@ -1,3 +1,87 @@
+/**
+ * Given a list of sorters, compare each, in order until a non-zero comparison
+ * is made
+ * 
+ * @author seans
+ * 
+ * @param <T>
+ */
+public class MultiLevelComparator<T> implements Comparator<T> {
+	private List<Comparator<T>> sorters = null;
+
+	public MultiLevelComparator(List<Comparator<T>> sorters) {
+		this.sorters = sorters;
+	}
+
+	@Override
+	public int compare(T o1, T o2) {
+		for (Comparator<T> c : sorters) {
+			int v = c.compare(o1, o2);
+			if (v != 0)
+				return v;
+		}
+		return 0;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+/**
+	 * Comparator for sorting by multiple attributes:
+	 * Compares with first Comparator if not equal return result
+	 * if equal use second one and repeat.
+	 * Repeat this pattern until last Comparator tried.
+	 */
+    static public class MultilevelComparator<T> implements Comparator<T> {
+    	private List<Comparator<T>> comps;
+    	
+    	public MultilevelComparator(List<Comparator<T>> comparators) {
+    		comps = comparators;
+    	}
+    	
+		@Override
+		public int compare(T arg0, T arg1) {
+			int ret = 0;
+			for(Comparator<T> cmp: comps) {
+				ret = cmp.compare(arg0, arg1);
+				if(ret != 0) {
+					return ret;
+				}
+			}
+			return ret;
+		}
+    }
+
+    public static <K, V extends Comparable<? super V>> Map<K, V> 
+    	sortByValue( Map<K, V> map )
+	{
+	    List<Map.Entry<K, V>> list =
+	        new LinkedList<Map.Entry<K, V>>( map.entrySet() );
+	    Collections.sort( list, new Comparator<Map.Entry<K, V>>()
+	    {
+	        public int compare( Map.Entry<K, V> o1, Map.Entry<K, V> o2 )
+	        {
+	            return (o1.getValue()).compareTo( o2.getValue() );
+	        }
+	    } );
+	
+	    Map<K, V> result = new LinkedHashMap<K, V>();
+	    for (Map.Entry<K, V> entry : list)
+	    {
+	        result.put( entry.getKey(), entry.getValue() );
+	    }
+	    return result;
+	}
+
+
+
 /*
  * Multilevel sort using comparator
  *
