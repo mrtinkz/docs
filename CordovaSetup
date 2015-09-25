@@ -2,8 +2,12 @@
 
 1. npm install -g cordova
 2. go to a existing angularjs project (cd path/to/project)
-3. cordova create cordova --link-to=project/app  #KEY ARGUMENT --link-to
+3. cordova create cordova --link-to=project/app or dist folder  #KEY ARGUMENT --link-to
 4. cordova platform add android
 5. cordova build android
 6. cordova run android
 7. make sure debuggins is enabled on the device.
+8. When working in the CLI you can define app icon(s) via <icon> element (config.xml). If you do not specify an icon then the Apache Cordova logo is used.
+8. <icon src="res/ios/icon.png" platform="ios" width="57" height="57" density="mdpi" />
+9. The above will replace the default cordova/phonegap icon to the icon you provide.
+10. Make sure you point to the dist folder to make sure everything's working fine.
