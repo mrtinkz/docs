@@ -1,0 +1,9 @@
+-- Cordova installation
+
+1. npm install -g cordova
+2. go to a existing angularjs project (cd path/to/project)
+3. cordova create cordova --link-to=project/app  #KEY ARGUMENT --link-to
+4. cordova platform add android
+5. cordova build android
+6. cordova run android
+7. make sure debuggins is enabled on the device.
